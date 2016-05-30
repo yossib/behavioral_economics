@@ -15,6 +15,7 @@ with open('/Users/yossi/PycharmProjects/untitled/data/all_data.csv') as csvfile:
         teams[position.team].append(position)
 
 for team, positions in teams.iteritems():
+    print "\nTeam: %s" % team
     for TestClass in TestClasses:
         tester = TestClass(positions)
-        print "Team: %s, Test for Bias: %s, Result: %s" % (team, tester.__class__.__name__, tester.test())
+        print " Bias: %s, Result: %s" % (tester.__class__.__name__, tester.test())
