@@ -4,14 +4,17 @@ from biases_tests.AnchoringBiasDashboard import AnchoringBiasDashboard
 from biases_tests.AnchoringBiasAri import AnchoringBiasAri
 from positions.Popsition import Position
 
-positions = []
 TestClasses = [AnchoringBiasAri, AnchoringBiasDashboard]
-
-with open('/Users/yossi/PycharmProjects/untitled/sheet1.csv') as csvfile:
+teams = dict()
+with open('/Users/yossi/PycharmProjects/untitled/data/all_data.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        positions.append(Position(**row))
+        position = Position(**row)
+        if not teams.get(position.team):
+            teams[position.team] = []
+        teams[position.team].append(position)
 
-for TestClass in TestClasses:
-    tester = TestClass(positions)
-    print "Test Bias %s, Result: %s" % (tester.__class__.__name__, tester.test())
+for team, positions in teams.iteritems():
+    for TestClass in TestClasses:
+        tester = TestClass(positions)
+        print "Team: %s, Test for Bias: %s, Result: %s" % (team, tester.__class__.__name__, tester.test())

@@ -16,11 +16,15 @@ app = Flask(__name__)
 @app.route('/')
 
 def hello_world():
+    teams = dict()
     positions = []
-    with open('/Users/yossi/PycharmProjects/untitled/sheet1.csv') as csvfile:
+    with open('/Users/yossi/PycharmProjects/untitled/data/all_data.csv') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            positions.append(Position(**row))
+            position =Position(**row)
+            if not teams.get(position.team):
+                teams[position.team] = []
+            teams[position.team].append(position)
 
     return "Hello world"
 
