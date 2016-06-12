@@ -25,8 +25,8 @@ class LossAversionBias(BaseBias):
 
         if result:
             resolution = 0.01
-            avg_time_in_loss = (float(time_in_loss_positions) / float(loss_positions_count)) / (60*60*23)
-            avg_time_in_profit = (float(time_in_profit_positions) / float(profit_positions_count)) / (60*60*24)
+            avg_time_in_loss = abs((float(time_in_loss_positions) / float(loss_positions_count)) / (60*60*23))
+            avg_time_in_profit = abs((float(time_in_profit_positions) / float(profit_positions_count)) / (60*60*24))
 
             avg_time_in_loss = int(np.round(avg_time_in_loss / resolution)) * resolution
             avg_time_in_profit = int(np.round(avg_time_in_profit / resolution)) * resolution

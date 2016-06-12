@@ -39,7 +39,15 @@ class OptimismBias(BaseBias):
                     if float(week_before['Adj_Close']) > float(first_position.entry_price) and float(other_position.entry_price) > float(week_after['Adj_Close']):
                         self.hit_count += 1
                         self.report_instances.append("Optimism found: 2 consqutive buys of symbol: %s while the stock has "
-                                                     "benn going down for 4 weeks, prices: %s, %s, %s, %s" % (symbol, week_before['Adj_Close'], first_position.entry_price, other_position.entry_price, week_after['Adj_Close']))
+                                                     "been going down for 4 weeks, data: "
+                                                     "date: %s, price: %s, \n"
+                                                     "date: %s,  price: %s, amount bought: %s\n"
+                                                     "date: %s, price: %s, amount bought: %s\n"
+                                                     "date: %s price:%s" % (symbol,
+                                                                         (first_position.date + datetime.timedelta(weeks=-1)).strftime("%Y-%m-%d"), week_before['Adj_Close'],
+                                                                         first_position.date.strftime("%Y-%m-%d"), first_position.entry_price, first_position.quantity,
+                                                                        other_position.date.strftime("%Y-%m-%d"), other_position.entry_price, other_position.quantity,
+                                                                            (other_position.date + datetime.timedelta(weeks=1)).strftime("%Y-%m-%d"), week_after['Adj_Close']))
                 except Exception as e:
                     print "Unable to get historical data for stock %s, first date %s, last_date %s:" % (symbol,
                                                                                                         (first_position.date + datetime.timedelta(weeks=-1)).strftime("%Y-%m-%d"),
