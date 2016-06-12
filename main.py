@@ -1,12 +1,11 @@
 import csv
 
-from biases_tests.AnchoringBiasDashboard import AnchoringBiasDashboard
-from biases_tests.AnchoringBiasAri import AnchoringBiasAri
 from biases_tests.HotHandBiasMultipleBuys import HotHandBiasMultipleBuys
 from biases_tests.LossAversionBias import LossAversionBias
+from biases_tests.OptimismBias import OptimismBias
 from positions.Popsition import Position
 
-TestClasses = [HotHandBiasMultipleBuys, LossAversionBias]
+TestClasses = [HotHandBiasMultipleBuys, LossAversionBias, OptimismBias]
 teams = dict()
 with open('/Users/yossi/PycharmProjects/untitled/data/all_data.csv') as csvfile:
     reader = csv.DictReader(csvfile)
