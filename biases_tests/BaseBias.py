@@ -6,5 +6,5 @@ class BaseBias(object):
     def test(self):
         raise NotImplementedError()
 
-    def getRepost(self):
+    def getReport(self):
         raise NotImplemented()

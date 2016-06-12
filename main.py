@@ -2,9 +2,11 @@ import csv
 
 from biases_tests.AnchoringBiasDashboard import AnchoringBiasDashboard
 from biases_tests.AnchoringBiasAri import AnchoringBiasAri
+from biases_tests.HotHandBiasMultipleBuys import HotHandBiasMultipleBuys
+from biases_tests.LossAversionBias import LossAversionBias
 from positions.Popsition import Position
 
-TestClasses = [AnchoringBiasAri, AnchoringBiasDashboard]
+TestClasses = [HotHandBiasMultipleBuys, LossAversionBias]
 teams = dict()
 with open('/Users/yossi/PycharmProjects/untitled/data/all_data.csv') as csvfile:
     reader = csv.DictReader(csvfile)
@@ -15,7 +17,8 @@ with open('/Users/yossi/PycharmProjects/untitled/data/all_data.csv') as csvfile:
         teams[position.team].append(position)
 
 for team, positions in teams.iteritems():
-    print "\nTeam: %s" % team
+    print "\nTeam: %s:" % team
     for TestClass in TestClasses:
         tester = TestClass(positions)
-        print " Bias: %s, Result: %s" % (tester.__class__.__name__, tester.test())
+        print "Bias test: %s, Result: %s" % (tester.__class__.__name__, tester.test())
+        print tester.getReport()
