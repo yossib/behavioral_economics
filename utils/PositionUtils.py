@@ -10,3 +10,7 @@ def positions_to_dict_of_positions_by_symbol(positions):
 
 def sort_positions_by_date(positions):
     positions.sort(key=lambda position: position.date)
+
+
+def remove_shorts(positions):
+    return [position for position in positions if position.position_type != 'short']

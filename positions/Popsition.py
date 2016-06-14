@@ -17,7 +17,7 @@ class Position:
         self.team = team
         self.date = datetime.strptime(date.strip(), "%m/%d/%Y")
         self.symbol = symbol
-        self.position_type = position_type
+        self.position_type = position_type.lower()
         self.entry_price = self._makeDecimal(entry_price)
         self.quantity = int(str(quantity).translate(None, ',$'))
         self.cost = self._makeDecimal(cost)
@@ -35,3 +35,9 @@ class Position:
             return Decimal(str(value).translate(None, '$,()\''))
         except:
             return None
+
+    def __str__(self):
+        return "%s\n" % self.__dict__
+
+    def __repr__(self):
+        return self.__str__()
